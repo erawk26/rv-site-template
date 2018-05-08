@@ -1,25 +1,45 @@
 <template lang="pug">
 	section.content
-		.flex-wrapper.filter(v-if='dealers.length')
-			dealer-filter(functional :key="location.zipcode" :loc="location" :dlrs="dealers")
-		.flex-wrapper(v-if='dealers.length')
+		.flex-wrapper.filter(v-if='dealerArr.length')
+			dealer-filter(@input="filterDealers" :key="location.zipcode" :loc="location" :options="getCerts(dealerArr)")
+		.flex-wrapper(v-if='dealerArr.length')
 			ul.dealer-list
-				dealer-card.dealer(v-for='dealer in dealers', :id='`item-${dealer.companyID}`' :key="dealer.companyID" :dealer="dealer")
+				dealer-card(v-for='dealer in filteredArr', :id='`item-${dealer.companyID}`' :key="dealer.companyID" :dealer="dealer")
 </template>
 
 <script>
 	import Dealers from './dealers';
+	import DealerCard from "./components/Card.vue";
 	import DealerFilter from "./components/Filter.vue";
-
+	let dealers = Dealers.dealers.map(d => d.data);
 	export default {
 		name: 'App',
-		components: {DealerFilter},
+		components: {DealerFilter, DealerCard},
 		data: () => ({
 			message: 'You loaded this page on ' + new Date().toLocaleString(),
 			location: Dealers.current_location,
-			dealers: Dealers.dealers.map(obj => obj.data)
+			dealerArr: dealers,
+			filteredArr: dealers // setting this value init's the list
 		}),
-		methods: {}
+		methods: {
+			getCerts: function (data) {
+				let certArr = [];
+				data.map(dlr => {
+					dlr.certifications
+						.map(crt => {
+							if (certArr.indexOf(crt) === -1) certArr.push(crt);
+						})
+				});
+				return certArr;
+			},
+			filterDealers: function (certs) {
+				const areTheyQualified = (dealer, certArr) => certArr
+					.every(cert => dealer.certifications.includes(cert));
+				const filterDlrs = (c) => this.dealerArr
+					.filter(dealer => areTheyQualified(dealer, c));
+				this.filteredArr = filterDlrs(certs);
+			}
+		}
 	};
 </script>
 

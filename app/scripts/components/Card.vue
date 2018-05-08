@@ -35,13 +35,13 @@
 <script>
 	export default {
 		name: 'dealer-card',
-		data: _this => _this.dealer,
+		data: a => a.dealer,
 		props: ['dealer'],
 		computed: {
 			hours: function () {
 				const days = Object.keys(this.weekHours),
 					arr = days.map((day, i) => this.weekHours[day]).slice(-3);
-				//onsole.log(days, this);
+				//console.log(days, this);
 				return arr
 				//array.sort(GetSortOrder("EmployeeName"));
 				// .filter(job => job.machine_name === this.active)[0];
@@ -52,7 +52,6 @@
 				.toLowerCase()
 				.replace(/[^\w ]+/g, '')
 				.replace(/ +/g, '-'),
-			// classKey:class
 			dayKey: n => (({
 				'mon': 'Monday',
 				'tue': 'Tuesday',
