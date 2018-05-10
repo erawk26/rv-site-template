@@ -2,7 +2,7 @@ require('smoothscroll');
 const ele = document.getElementById('top');
 const btn = document.getElementById('back-to-top');
 
-function isScrolledIntoView (el) {
+function isScrolledIntoView(el) {
 	const rect = el.getBoundingClientRect();
 	const elemTop = rect.top;
 	const elemBottom = rect.bottom;
@@ -11,6 +11,5 @@ function isScrolledIntoView (el) {
 	return (elemTop >= 0) && (elemBottom <= window.innerHeight);
 }
 
-window.onscroll = function () {
-	return isScrolledIntoView(ele) ? btn.style.opacity = '0' : btn.style.opacity = '1';
-};
+window.onscroll = ()=> isScrolledIntoView(ele) ? btn.style.opacity = '0' : btn.style.opacity = '1';
+
