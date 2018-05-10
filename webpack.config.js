@@ -62,7 +62,16 @@ const commonConfig = merge([
 			noParse: /\.min\.js/
 		}
 	},
-	parts.loadVue(),
+	parts.loadVue({
+		include: PATHS.app,
+		options: {
+			postLoaders: {
+				html: 'babel-loader'
+			},
+			// `excludedPreLoaders` should be regex
+			excludedPreLoaders: /(eslint-loader)/
+		}
+	}),
 	parts.loadPug(),
 	parts.lintJS({include: PATHS.app, options: lintJSOptions}),
 	parts.loadFonts({
@@ -162,7 +171,10 @@ const developmentConfig = merge([
 		host: process.env.HOST,
 		port: process.env.PORT
 	}),
-	parts.loadCSS({include: PATHS.app, use: [cssPreprocessorLoader]}),
+	parts.loadCSS({
+		include: PATHS.app,
+		use: [cssPreprocessorLoader]
+	}),
 	parts.loadImages({include: PATHS.app})
 ]);
 
