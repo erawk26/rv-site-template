@@ -2,7 +2,7 @@
 	li.dealer-card(:title="name")
 		h2 {{ name }}
 		hr
-		a(:href="`tel:${phone1}`")
+		a.tel(:href="`tel:${phone1}`")
 			h3
 				span.ss-phone
 				| Tap to call
@@ -33,43 +33,43 @@
 					span {{ cert }}
 </template>
 <script>
-	export default {
-		name: 'dealer-card',
-		data: a => a.dealer,
-		props: ['dealer'],
-		computed: {
-			hours: function () {
-				const days = Object.keys(this.weekHours),
-					arr = days.map((day, i) => this.weekHours[day]).slice(-3);
-				//console.log(days, this);
-				return arr
-				//array.sort(GetSortOrder("EmployeeName"));
-				// .filter(job => job.machine_name === this.active)[0];
-			}
-		},
-		methods: {
-			machine_readable: str => str
-				.toLowerCase()
-				.replace(/[^\w ]+/g, '')
-				.replace(/ +/g, '-'),
-			dayKey: n => (({
-				'mon': 'Monday',
-				'tue': 'Tuesday',
-				'wed': 'Wednesday',
-				'thu': 'Thursday',
-				'fri': 'Friday',
-				'sat': 'Saturday',
-				'sun': 'Sunday',
-			})[n]),
-			classKey: machine_name => (({
-				'installation-pro': 'ss-star',
-				'commercial-pro': 'ss-users',
-				'residential-pro': 'ss-home',
-				'service-pro': 'ss-settings',
-			})[machine_name])
-			// imgRequire: img => require(`../../images/${img}`),
+export default {
+	name: 'dealer-card',
+	data: a => a.dealer,
+	props: ['dealer'],
+	computed: {
+		hours: function () {
+			const days = Object.keys(this.weekHours);
+			const arr = days.map(day => this.weekHours[day]).slice(-3);
+			// console.log(days, this);
+			return arr;
+			// array.sort(GetSortOrder("EmployeeName"));
+			// .filter(job => job.machine_name === this.active)[0];
 		}
+	},
+	methods: {
+		machine_readable: str => str
+			.toLowerCase()
+			.replace(/[^\w ]+/g, '')
+			.replace(/ +/g, '-'),
+		dayKey: n => (({
+			mon: 'Monday',
+			tue: 'Tuesday',
+			wed: 'Wednesday',
+			thu: 'Thursday',
+			fri: 'Friday',
+			sat: 'Saturday',
+			sun: 'Sunday'
+		})[n]),
+		classKey: x => (({
+			'installation-pro': 'ss-star',
+			'commercial-pro': 'ss-users',
+			'residential-pro': 'ss-home',
+			'service-pro': 'ss-settings'
+		})[x])
+		// imgRequire: img => require(`../../images/${img}`),
 	}
+};
 </script>
 <style lang="scss">
 	@import '../../styles/init';
@@ -82,17 +82,25 @@
 		display: inline-block;
 	}
 
+	a.tel h3{
+		background: $md-blue-rvt;
+		color: #fff;
+		.ss-phone {
+			background: $dk-blue-rvt
+		}
+	}
+
 	.certs {
 		@include flex(space-between, stretch, $wrap: wrap);
 		width: 100%;
-		height:100%;
+		height: 100%;
 		padding: 30px 20px 10px 40px;
 		text-align: left;
 		background: $lt-gray-rvt;
 		li {
 			flex: 1 1 50%;
 			max-width: 50%;
-			margin-bottom:20px;
+			margin-bottom: 20px;
 		}
 		i {
 			&:before {
