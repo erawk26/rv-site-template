@@ -1,11 +1,11 @@
 <template lang="pug">
 	section.content
-		.flex-wrapper.filter(v-if='dealerArr.length')
-			dealer-filter(:options="getCerts(dealerArr)",
-			@input="filterDealers",
+		.flex-wrapper.filter
+			dealer-filter(@input="filterDealers",
 			:key="location.zipcode",
-			:loc="location")
-		.flex-wrapper.list(v-if='dealerArr.length')
+			:loc="location",
+			:options="certs")
+		.flex-wrapper
 			ul.dealer-list
 				dealer-card(v-for='dealer in filteredArr',
 				:id='`item-${dealer.companyID}`',
@@ -17,7 +17,6 @@
 import Dealers from './dealers';
 import DealerCard from './components/Card.vue';
 import DealerFilter from './components/Filter.vue';
-
 const dealers = Dealers.dealers.map(d => d.data);
 export default {
 	name: 'App',
@@ -25,26 +24,27 @@ export default {
 	data: () => ({
 		message: 'You loaded this page on ' + new Date().toLocaleString(),
 		location: Dealers.current_location,
-		dealerArr: dealers,
-		filteredArr: dealers // setting this value init's the list
+		filteredArr: dealers
 	}),
-	methods: {
-		getCerts: data => {
+	computed: {
+		certs: ()=> {
 			let certArr = [];
-			data.forEach(dlr => {
+			dealers.forEach(dlr => {
 				dlr.certifications
 					.forEach(crt => {
-						if (certArr.indexOf(crt) === -1) certArr.push(crt);
+						if (!certArr.includes(crt)) certArr.push(crt);
 					});
 			});
 			return certArr;
-		},
-		filterDealers: certs => {
-			const areTheyQualified = (dealer, certArr) => certArr
-				.every(cert => dealer.certifications.includes(cert));
-			const filterDlrs = (c) => this.dealerArr
-				.filter(dealer => areTheyQualified(dealer, c));
-			this.filteredArr = filterDlrs(certs);
+		}
+	},
+	methods: {
+		filterDealers: function(checkedCerts) {
+			const areTheyQualified = dealer => checkedCerts // check the array of certificates
+				.every(cert => dealer // make sure the dealer
+					.certifications.includes(cert)); // has every cert that is enabled
+			this.filteredArr = dealers // return the dealer array...
+				.filter(dealer => areTheyQualified(dealer)); // ... with dealers who are qualified
 		}
 	}
 };
@@ -60,13 +60,6 @@ export default {
 		}
 	}
 
-	.flex-wrapper.list {
-		padding: 40px;
-		@include over-max-width {
-			padding: 40px 0;
-		}
-	}
-
 	.dealer-list {
 		@include set-max-width;
 		@include flex(center, stretch, $wrap: wrap);
@@ -74,7 +67,7 @@ export default {
 		@media (max-width: $desktop-breakpoint) {
 			@include flex-grid(2, 25px);
 		}
-		@include mobile {
+		@media (max-width: 650px) {
 			@include flex-grid(1, 5px);
 		}
 	}
