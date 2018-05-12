@@ -34,6 +34,7 @@
 </template>
 <script>
 import EmailDealer from './EmailDealer.vue';
+
 export default {
 	name: 'dealer-card',
 	props: ['dealer'],
@@ -68,11 +69,17 @@ export default {
 			console.log(data);
 			this.$modal.show(
 				EmailDealer, {
-					dealer: data
+					dealer: {
+						email: data.email,
+						name: data.name,
+						machine_name: this.machine_readable(data.name)
+					}
 				},
 				{
-					width: '90%',
-					height: '90%',
+					width: 700,
+					// height: 925,
+					height: 'auto',
+					// scrollable: true,
 					draggable: true,
 					adaptive: true,
 					resizable: true
@@ -93,7 +100,7 @@ export default {
 		display: inline-block;
 	}
 
-	a.tel h3{
+	a.tel h3 {
 		background: $md-blue-rvt;
 		color: #fff;
 		.ss-phone {
