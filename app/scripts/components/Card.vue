@@ -1,15 +1,15 @@
 <template lang="pug">
-	li.dealer-card(:title="name")
-		h2 {{ name }}
+	li.dealer-card(:title="dealer.name")
+		h2 {{ dealer.name }}
 		hr
-		a.tel(:href="`tel:${phone1}`")
+		a.tel(:href="`tel:${dealer.phone1}`")
 			h3
 				span.ss-phone
 				| Tap to call
-				span.number {{ phone1 }}
+				span.number {{ dealer.phone1 }}
 		small Can't talk now? Click below to send an email.
 		br
-		button
+		button(@click="showForm(dealer)")
 			i.ss-mail
 			span Contact this Pro
 		h4 Business Hours
@@ -28,23 +28,20 @@
 					span(v-else) Closed
 		.flex-wrapper
 			ul.certs
-				li(v-for="cert in certifications")
+				li(v-for="cert in dealer.certifications")
 					i(:class="classKey(machine_readable(cert))")
 					span {{ cert }}
 </template>
 <script>
+import EmailDealer from './EmailDealer.vue';
 export default {
 	name: 'dealer-card',
-	data: a => a.dealer,
 	props: ['dealer'],
 	computed: {
-		hours: function () {
-			const days = Object.keys(this.weekHours);
-			const arr = days.map(day => this.weekHours[day]).slice(-3);
-			// console.log(days, this);
+		hours() {
+			const days = Object.keys(this.dealer.weekHours);
+			const arr = days.map(day => this.dealer.weekHours[day]).slice(-3);
 			return arr;
-			// array.sort(GetSortOrder("EmployeeName"));
-			// .filter(job => job.machine_name === this.active)[0];
 		}
 	},
 	methods: {
@@ -66,8 +63,22 @@ export default {
 			'commercial-pro': 'ss-users',
 			'residential-pro': 'ss-home',
 			'service-pro': 'ss-settings'
-		})[x])
-		// imgRequire: img => require(`../../images/${img}`),
+		})[x]),
+		showForm(data) {
+			console.log(data);
+			this.$modal.show(
+				EmailDealer, {
+					dealer: data
+				},
+				{
+					width: '90%',
+					height: '90%',
+					draggable: true,
+					adaptive: true,
+					resizable: true
+				}
+			);
+		}
 	}
 };
 </script>

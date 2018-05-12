@@ -11,6 +11,7 @@
 				:id='`item-${dealer.companyID}`',
 				:key="dealer.companyID",
 				:dealer="dealer")
+		modals-container
 </template>
 
 <script>
@@ -39,7 +40,7 @@ export default {
 		}
 	},
 	methods: {
-		filterDealers: function(checkedCerts) {
+		filterDealers(checkedCerts) {
 			const areTheyQualified = dealer => checkedCerts // check the array of certificates
 				.every(cert => dealer // make sure the dealer
 					.certifications.includes(cert)); // has every cert that is enabled
