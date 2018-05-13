@@ -11,7 +11,7 @@
 				:id='`item-${dealer.companyID}`',
 				:key="dealer.companyID",
 				:dealer="dealer")
-			modals-container
+			modals-container(height="auto" :scrollable="true")
 </template>
 
 <script>
