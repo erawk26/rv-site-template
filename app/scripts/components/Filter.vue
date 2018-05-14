@@ -19,13 +19,6 @@ export default {
 			.toLowerCase()
 			.replace(/[^\w ]+/g, '')
 			.replace(/ +/g, '-'),
-		inputChecked: (evt) => {
-			console.log('clicked', evt.target.checked);
-			this.$emit('selected', {
-				element: this.element,
-				newSelection: evt.target.checked
-			});
-		}
 	}
 };
 </script>

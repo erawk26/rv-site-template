@@ -17,7 +17,8 @@
 					input(type="text",
 					name="name",
 					id="customer-name",
-					v-validate="'required:true'",
+					:class="{'invalid': fields.name && showErrors && fields.name.invalid}"
+					v-validate="{ required: true, regex: /^[a-z,.'-]+\\s?[a-z,.'-]+$/i }",
 					v-model="customer.name")
 					.helper
 						img.valid(src="../../images/checkmark-circle.png",
@@ -27,8 +28,9 @@
 				.input-group.phone
 					label Phone number
 					input(type="phone",
-					id="customer-phone",
 					name="phone",
+					id="customer-phone",
+					:class="{'invalid': fields.phone && showErrors && fields.phone.invalid}"
 					v-validate="{ required: true, regex: /^(?:1|1 )*(\\([2-9]{1}\\d{2}\\)|[2-9]{1}\\d{2})[- ]*(\\d{3})[- ]*(\\d{4})$/ }",
 					v-model="customer.phone1")
 					.helper
@@ -39,8 +41,9 @@
 				.input-group.email
 					label Email address
 					input(type="email",
-					id="customer-email",
 					name="email",
+					id="customer-email",
+					:class="{'invalid': fields.email && showErrors && fields.email.invalid}"
 					formnovalidate="true",
 					v-validate="'required|email'",
 					v-model="customer.email")
@@ -55,7 +58,7 @@
 					name="customer-message",
 					v-model="customer.message")
 					.helper
-						small Optional
+						small optional
 				.input-group.radios
 					strong Do you currently own a pool or spa?
 					input(type="radio",
@@ -69,10 +72,11 @@
 					v-model="customer.poolorspa")
 					label(for='poolorspafalse') No
 					.helper
-						small Optional
+						small optional
 				hr
 				a.submit(@click="validateForm")
-					span Send my email
+					span Send
+						span.hide  my email
 					i.ss-navigateright
 		.form-footer
 			small.disclaimer
@@ -96,7 +100,6 @@ export default {
 						console.log('Form Submitted!');
 				} else {
 					this.showErrors = true;
-					console.log('Please correct any errors listed at the top of the form!',this);
 				}
 			});
 		}
@@ -108,6 +111,7 @@ export default {
 	@import '../../styles/init';
 
 	.close {
+		font-size:25px;
 		cursor: pointer;
 		position: absolute;
 		top: 20px;
@@ -133,33 +137,47 @@ export default {
 	.form-container {
 		width: 100%;
 		@include flex(flex-start, flex-start, $direction: column);
-		@include marding(0, 15px);
+		@include marding(0, 20px);
 		min-height: 30vh;
 	}
 
 	.form-footer {
+		@include mobile{display: none;}
 		@include flex(flex-end, flex-start, $direction: column);
 		@include marding(0, 20px);
 		background: $lt-gray-rvt;
 	}
 
 	form {
-		padding: 15px;
-		background: $lt-gray-rvt;
 		width: 100%;
+		@include not-mobile {
+			padding: 15px;
+			background: $lt-gray-rvt;
+		}
 	}
 
 	.is-danger {
-		$red:red;
-		border: 1px solid $red;
+		border: 1px solid $formRed;
 		border-radius: 4px;
 		&.help {
 			border: none;
-			color: $red;
+			color: $formRed;
 		}
 	}
-	.error-item{margin:0 10px;
-	>p:before{content:'*';position:relative;padding-right: .25em}}
+
+	.error-item {
+		margin: 0 10px;
+		p {
+			margin: 5px 0;
+		}
+	;
+		> p:before {
+			content: '*';
+			position: relative;
+			padding-right: .25em
+		}
+	}
+
 	label {
 		font-weight: bold;
 		display: inline-block;
@@ -170,6 +188,9 @@ export default {
 		width: 100%;
 		margin: 0;
 		padding: 8px;
+		&.invalid {
+			background: rgba($formRed, .15)
+		}
 	}
 
 	input[type="phone"] {
@@ -178,19 +199,46 @@ export default {
 	}
 
 	input[type="radio"] {
-		display: none;
-		+ label {
-			/*font-weight: bold;*/
-			border: 0.5px solid #333;
-			margin: 5px 10px 5px 0;
-			padding: 3px 20px;
-			border-radius: 5px;
+		+ label{
 		}
-		&:checked + label {
-			color: white;
-			background: $aqua-rvt;
-
-			/*font-weight: bold;*/
+		@include mobile {
+			display: none;
+			+ label {
+				font-size: .95em;
+				margin: 0 15px 0 0;
+				@include flex($display:inline-flex);
+				&:before {
+					margin-right: .35em;
+					border-radius: 2px;
+					border: 1px solid #999;
+					background: $lt-gray-rvt;
+					width: 18px;
+					height: 18px;
+					position: relative;
+					content: ""
+				}
+			}
+			&:checked + label {
+				font-weight: bold;
+				&:before {
+					background: #fff;
+					border: 6px solid $md-blue-rvt;
+				}
+			}
+		}
+		@include not-mobile {
+			display: none;
+			+ label {
+				display:inline-block;
+				border: 0.5px solid #333;
+				margin: 5px 10px 5px 0;
+				padding: 3px 20px;
+				border-radius: 5px;
+			}
+			&:checked + label {
+				color: white;
+				background: $aqua-rvt;
+			}
 		}
 	}
 
@@ -207,27 +255,55 @@ export default {
 		&:not(.radios) {
 			label {
 				font-size: .85em;
+				padding-right:45px;
 			}
 		}
 		&.radios {
-			strong {
+			@include mobile{@include flex(flex-start,stretch,$wrap:wrap);}
+			> strong {
 				font-size: .85em;
 				display: block;
 				width: 100%;
-				margin-bottom: 5px;
+				margin-bottom: 20px;
+				padding-right:45px;
 			}
 		}
-		&.phone{max-width:250px;@include mobile{max-width: 100%;}}
+		&.phone {
+			max-width: 250px;
+			@include mobile {
+				max-width: 100%;
+			}
+		}
 	}
 
 	.submit {
 		display: block;
-		cursor:pointer;
+		cursor: pointer;
 		width: 100%;
 		text-align: center;
 		padding: 30px;
-		span{font-weight:bold}
-		i{color:$aqua-rvt;&:before{padding-left:.25em;}}
+		@include mobile {
+			text-align: right;
+			padding: 5px 5px 0 0;
+			.ss-navigateright {
+				display: none
+			}
+			.hide {
+				display: none
+			}
+			span {font-size: 1.15em;
+				color: $aqua-rvt;
+			}
+		}
+		span {
+			font-weight: bold;
+		}
+		i {
+			color: $aqua-rvt;
+			&:before {
+				padding-left: .25em;
+			}
+		}
 	}
 
 	.helper {
@@ -239,6 +315,7 @@ export default {
 		overflow: visible;
 		top: 10px;
 		right: 1px;
+		small{font-style: italic;color:#999}
 		img {
 			width: 20px;
 			height: 20px;

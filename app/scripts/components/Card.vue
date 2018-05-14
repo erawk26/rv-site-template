@@ -5,7 +5,7 @@
 		a.tel(:href="`tel:${dealer.phone1}`")
 			h3
 				span.ss-phone
-				| Tap to call
+				small Tap to call
 				span.number {{ dealer.phone1 }}
 		small Can't talk now? Click below to send an email.
 		br
@@ -66,7 +66,6 @@ export default {
 			'service-pro': 'ss-settings'
 		})[x]),
 		showForm(data) {
-			console.log(data);
 			this.$modal.show(
 				EmailDealer, {
 					dealer: {
@@ -76,11 +75,11 @@ export default {
 					}
 				},
 				{
-					width: 700,
-					// height: 925,
+					width: '90%',
+					dynamic: true,
+					// draggable: true, // for some reason this breaks radio buttons on mobile
 					height: 'auto',
-					// scrollable: true,
-					draggable: true,
+					scrollable: true,
 					adaptive: true,
 					resizable: true
 				}
@@ -93,19 +92,50 @@ export default {
 	@import '../../styles/init';
 
 	.dealer-card {
+		@include flex($direction:column);
 		text-align: center;
 		border-radius: 15px;
 		background: #fff;
 		box-shadow: 0 1px 10px 1px rgba(#000, .5);
-		display: inline-block;
+		flex: 1;
+		margin: 30px 30px 0;
+		min-width: 280px;
+		max-width: 100%;
+		@include not-mobile {
+			flex: 1 0 350px;
+			min-width: 320px;
+			max-width: 350px;
+			margin: 15px;
+		}
+		> .flex-wrapper{flex:1;width:100%}
+		> small {
+			text-align: center;
+		}
 	}
 
 	a.tel h3 {
+		@include marding(0 auto, 0);
+		display: inline-block;
 		background: $md-blue-rvt;
 		color: #fff;
 		.ss-phone {
+			@include flex($display: inline-flex);
+			text-align: center;
+			width: 32px;
+			height: 32px;
+			margin: 7px;
+			padding: 4px 4px 0;
 			background: $dk-blue-rvt
 		}
+		small {
+			font-weight: bold;
+		}
+	}
+
+	.number {
+		font-weight: bold;
+		font-size: 1.2em;
+		margin: 0 10px;
 	}
 
 	.certs {

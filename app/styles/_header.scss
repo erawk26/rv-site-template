@@ -24,7 +24,10 @@ header {
 	}
 	.account {
 		background: $dk-blue-rvt;
-		@include flex;
+		display: none;
+		@include desktop {
+			@include flex;
+		}
 		color: white;
 		a {
 			color: currentColor

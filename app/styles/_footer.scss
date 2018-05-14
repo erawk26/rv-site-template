@@ -24,6 +24,7 @@ footer {
 		}
 	}
 	ul.account {
+		@media (min-width:$tablet-breakpoint){display: none;}
 		li {
 			@extend %divider
 		}

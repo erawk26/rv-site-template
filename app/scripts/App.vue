@@ -11,7 +11,7 @@
 				:id='`item-${dealer.companyID}`',
 				:key="dealer.companyID",
 				:dealer="dealer")
-			modals-container(height="auto" :scrollable="true")
+			modals-container
 </template>
 
 <script>
@@ -64,12 +64,12 @@ export default {
 	.dealer-list {
 		@include set-max-width;
 		@include flex(center, stretch, $wrap: wrap);
-		@include flex-grid(3, 25px);
-		@media (max-width: $desktop-breakpoint) {
-			@include flex-grid(2, 25px);
-		}
-		@media (max-width: 650px) {
-			@include flex-grid(1, 5px);
-		}
+		//@include flex-grid(3, 25px);
+		//@media (max-width: $desktop-breakpoint) {
+			//@include flex-grid(2, 25px);
+		//}
+		//@media (max-width: 650px) {
+			//@include flex-grid(1, 5px);
+		//}
 	}
 </style>
