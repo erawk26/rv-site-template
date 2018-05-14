@@ -107,6 +107,18 @@ img.responsive {
 .uc {
 	text-transform: uppercase;
 }
+
+.dk-blue {
+	color: $dk-blue-rvt
+}
+
+.md-blue {
+	color: $md-blue-rvt
+}
+
+.aqua {
+	color: $dk-blue-rvt
+}
 .commercial-icon{@include flex; img{padding:0 .5em;height:14px;}}
 //hr {
 //	&.star-dark, &.star-light {

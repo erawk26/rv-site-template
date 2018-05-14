@@ -1,6 +1,6 @@
 <template lang="pug">
 	li.dealer-card(:title="dealer.name")
-		h2 {{ dealer.name }}
+		h2.title {{ dealer.name }}
 		hr
 		a.tel(:href="`tel:${dealer.phone1}`")
 			h3
@@ -66,31 +66,36 @@ export default {
 			'service-pro': 'ss-settings'
 		})[x]),
 		showForm(data) {
+			let w = window.innerWidth;
 			this.$modal.show(
-				EmailDealer, {
+				EmailDealer, // component definition
+				{ // component props
 					dealer: {
 						email: data.email,
 						name: data.name,
 						machine_name: this.machine_readable(data.name)
 					}
 				},
-				{
-					width: '90%',
+				{ // modal parameters
+					width: w > 800 ? 768 : '90%',
 					dynamic: true,
-					// draggable: true, // for some reason this breaks radio buttons on mobile
+					// draggable: true, /* for some reason this breaks radio label buttons on mobile */
 					height: 'auto',
-					scrollable: true,
+					scrollable: w < 768, // turn on for mobile widths
 					adaptive: true,
 					resizable: true
-				}
+				},
+				// { // modal event listeners
+				//
+				// }
 			);
 		}
 	}
 };
 </script>
-<style lang="scss">
+<style lang="scss" >
 	@import '../../styles/init';
-
+	hr{width:85%;margin:auto;border:none;background: transparent;border-top:1px solid $dk-gray-rvt}
 	.dealer-card {
 		@include flex($direction:column);
 		text-align: center;
@@ -112,9 +117,9 @@ export default {
 			text-align: center;
 		}
 	}
-
+	.title{padding:0 20px;}
 	a.tel h3 {
-		@include marding(0 auto, 0);
+		@include marding(10px auto, 0);
 		display: inline-block;
 		background: $md-blue-rvt;
 		color: #fff;

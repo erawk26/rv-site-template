@@ -53,15 +53,16 @@ header {
 }
 
 .mobile-menu {
-	$stroke: $dk-blue-rvt;
-	$menu-bg: $stroke;
-	$menu-link-hover: blue;
-	$menu-link: white;
+	$stroke: $aqua-rvt;
+	$menu-bg: $lt-gray-rvt;
+	$menu-link-hover: $stroke;
+	$menu-link: $dk-gray-rvt;
 	@include desktop {
 		display: none;
 	}
 	@include flex($direction: column);
 	position: relative;
+	z-index:10;
 	margin-right: 35px;
 	ul {
 		@include flex($direction: column);
@@ -77,56 +78,33 @@ header {
 		transform: rotate(0deg);
 		transition: 0.5s ease-in-out;
 		cursor: pointer;
-		span {
-			display: block;
-			position: absolute;
-			height: 7px;
-			width: 50%;
-			background: $stroke;
-			opacity: 1;
-			transform: rotate(0deg);
-			transition: 0.25s ease-in-out;
-			&:nth-child(even) {
-				left: 50%;
-				border-radius: 0 9px 9px 0;
-			}
-
-			&:nth-child(odd) {
-				left: 0;
-				border-radius: 9px 0 0 9px;
-			}
-
-			&:nth-child(1),
-			&:nth-child(2) {
-				top: 0;
-			}
-
-			&:nth-child(3),
-			&:nth-child(4) {
-				top: 18px;
-			}
-
-			&:nth-child(5),
-			&:nth-child(6) {
-				top: 36px;
-			}
-		}
 	}
 	.collapse {
+		overflow: hidden;
 		transition: all .15s ease-out;
 		position: fixed;
 		display: block;
-		background: rgba($menu-bg, .85);
+		background: #fff;
 		right: 0;
 		left: 0;
 		top: 0;
-		bottom: 0;
+		bottom: auto;
 		transform: translate(150%, 0);
-		padding: 135px 20px 20px;
+		padding: 0 0 0; // 135px 20px 20px;
 		z-index: -3;
+		.mobile-menu-header{padding:25px 0;border-top:5px solid $aqua-rvt;p{font: bold 1.4em $fontHead}}
+		ul{border-bottom:5px solid $aqua-rvt}
 		li {
-			a {
-				font-size: 2em;
+			width: 100%;
+			display: block;
+			margin: 1px 0;
+			background: $menu-bg;
+			a {position: relative;
+				display: block;
+				width: 100%;
+				padding:30px 20px;
+				font-size: 1.5em;
+				font-weight:bold;
 				font-family: $fontHead;
 				text-align: left;
 				justify-content: flex-end;
@@ -137,53 +115,20 @@ header {
 				&:hover, &:active {
 					color: $menu-link-hover;
 				}
+				&:after {position:absolute; right:20px;top:50%;transform: translateY(-50%);
+					color: $aqua-rvt;
+					font-family: $fontIcon;
+					content: '\25BB';
+				}
 			}
 			padding: 0;
 			&:after {
-				display: none
+				//display: none
 			}
 		}
 	}
 	&.opened {
-		.hamburger span {
-			background-color: $menu-link;
-			&:nth-child(1),
-			&:nth-child(6) {
-				transform: rotate(45deg);
-			}
-			&:nth-child(2),
-			&:nth-child(5) {
-				transform: rotate(-45deg);
-			}
-
-			&:nth-child(1) {
-				left: 5px;
-				top: 7px;
-			}
-
-			&:nth-child(2) {
-				left: calc(50% - 5px);
-				top: 7px;
-			}
-
-			&:nth-child(3) {
-				left: -50%;
-				opacity: 0;
-			}
-
-			&:nth-child(4) {
-				left: 100%;
-				opacity: 0;
-			}
-			&:nth-child(5) {
-				left: 5px;
-				top: 29px;
-			}
-			&:nth-child(6) {
-				left: calc(50% - 5px);
-				top: 29px;
-			}
-		}
+		.hamburger{opacity:0;width:0;}
 		.collapse {
 			transition: all .65s ease-in;
 			transform: translate(0) scale(1);

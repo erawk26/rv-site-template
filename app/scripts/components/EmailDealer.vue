@@ -205,13 +205,13 @@ export default {
 			display: none;
 			+ label {
 				font-size: .95em;
-				margin: 0 15px 0 0;
+				margin: 0 15px 15px 0;
 				@include flex($display:inline-flex);
 				&:before {
 					margin-right: .35em;
 					border-radius: 2px;
-					border: 1px solid #999;
-					background: $lt-gray-rvt;
+					border: 1px solid $dk-gray-rvt;
+					background: $md-gray-rvt;
 					width: 18px;
 					height: 18px;
 					position: relative;

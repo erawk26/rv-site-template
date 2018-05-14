@@ -11,30 +11,30 @@
 }
 
 @mixin mobile { //Media Queries
-	@media (max-width: #{$mobile-breakpoint - 1px}) {
+	@media (max-width: #{$mobile-breakpoint - 1}) {
 		@content;
 	}
 }
 
 @mixin not-mobile {
-	@media (min-width: #{$mobile-breakpoint}) {
+	@media (min-width: $mobile-breakpoint) {
 		@content;
 	}
 }
 
 @mixin tablet {
-	@media (min-width: #{$mobile-breakpoint}) and (max-width: #{$tablet-breakpoint - 1}) {
+	@media (min-width: $mobile-breakpoint) and (max-width: #{$tablet-breakpoint - 1}) {
 		@content;
 	}
 }
 
 @mixin not-desktop {
-	@media (max-width: #{$tablet-breakpoint} - 1) {
+	@media (max-width: #{$tablet-breakpoint - 1}) {
 		@content;
 	}
 }
 @mixin desktop {
-	@media (min-width: #{$tablet-breakpoint}) {
+	@media (min-width: $tablet-breakpoint) {
 		@content;
 	}
 }
