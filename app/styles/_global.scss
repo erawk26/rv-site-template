@@ -27,6 +27,7 @@ body {
 	background: url('../images/water-image.png') repeat-x center 100px;
 	background-size: 100% auto;
 	@media(min-width: 2200px){background-position: top;}
+	@media(max-width: $rvt-menu-bp-max){background-position: top 63px center;}
 }
 
 a {

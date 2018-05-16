@@ -83,7 +83,8 @@ header {
 	@media (max-width: $rvt-menu-bp-max) {
 		display: none;
 	}
-	li {flex:1;
+	li {
+		flex:1;
 		max-width:150px;
 		display: inline-block;
 		margin: 35px 0;
@@ -156,7 +157,7 @@ header {
 		ul {
 			border-bottom: 5px solid $aqua-rvt
 		}
-		li {
+		li {max-width:100%;
 			width: 100%;
 			display: block;
 			margin: 1px 0;

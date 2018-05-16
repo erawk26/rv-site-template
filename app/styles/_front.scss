@@ -1,4 +1,10 @@
 section {
 	@include flex;
 }
-section.hero{min-height:150px}
+
+section.hero {
+	min-height: 185px;
+	@media(max-width: $rvt-menu-bp-max) {
+		min-height: 75px
+	}
+}
