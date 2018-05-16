@@ -13,16 +13,17 @@
 body, html {
 	font-family: $fontBody;
 	font-size: $base-font-size;
+	font-weight: normal;
 	height: 100%;
 	margin: 0;
 	padding: 0;
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-font-smoothing: antialiased;
-	font-weight: 400;
 }
 
 body {
 	padding-top: 45px;
+	min-height:100vh;
 	background: url('../images/water-image.png') repeat-x center 100px;
 	background-size: 100% auto;
 	@media(min-width: 2200px){background-position: top;}
@@ -42,7 +43,7 @@ h3,
 h4,
 h5 {
 	font-family: $fontHead;
-	font-weight: 500;
+	font-weight: bold;
 }
 
 a#intro {
@@ -119,7 +120,18 @@ img.responsive {
 .aqua {
 	color: $dk-blue-rvt
 }
-.commercial-icon{@include flex; img{padding:0 .5em;height:14px;}}
+
+.bld{font-weight: bold}
+
+.xbld{font-weight: 900}
+
+.commercial-icon {
+	@include flex;
+	img {
+		padding: 0 .5em;
+		height: 14px;
+	}
+}
 //hr {
 //	&.star-dark, &.star-light {
 //		max-width: 15rem;

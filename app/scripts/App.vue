@@ -1,10 +1,17 @@
 <template lang="pug">
 	section.content
 		.flex-wrapper.filter
+			.filter-header
+				.filter-info
+					| {{ filteredArr.length }} Dealers in {{ location.zipcode }}
+				h4
+					| Filter Results
+					i.ss-navigatedown
 			dealer-filter(@input="filterDealers",
 			:key="location.zipcode",
 			:loc="location",
 			:options="certs")
+		hr
 		.flex-wrapper
 			ul.dealer-list
 				dealer-card(v-for='dealer in filteredArr',
@@ -18,6 +25,7 @@
 import Dealers from './dealers';
 import DealerCard from './components/Card.vue';
 import DealerFilter from './components/Filter.vue';
+
 const dealers = Dealers.dealers.map(d => d.data);
 export default {
 	name: 'App',
@@ -28,7 +36,7 @@ export default {
 		filteredArr: dealers
 	}),
 	computed: {
-		certs: ()=> {
+		certs: () => {
 			let certArr = [];
 			dealers.forEach(dlr => {
 				dlr.certifications
@@ -54,22 +62,64 @@ export default {
 <style lang="scss" scoped>
 	@import '../styles/init';
 
+	.filter-header {
+		font-weight: bold;
+		@include flex;
+		h4 {
+			padding: 10px;
+			position: relative;
+			font-weight: bold;
+			margin: 0;
+
+		}
+		@media (max-width: $rvt-dealer-bp-max){
+			width: 100%;
+			h4 {
+				padding-right: 60px;
+				border: 1px solid $dk-gray-rvt;
+				border-bottom: none;
+				background: white;
+			}
+		}
+		i:before {
+			@media (min-width: $rvt-dealer-bp) {
+				display: none
+			}
+			background: $lt-gray-rvt;
+			border-left: 1px solid $dk-gray-rvt;
+			@include flex;
+			height: 100%;
+			width: 40px;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			right: 0;
+		}
+	}
+
+	.filter-info {
+		color: $md-blue-rvt;
+		flex: 1;
+	}
+
 	.content {
 		@include flex($direction: column);
-		.filter {
+		.filter {@include set-max-width;
+			@include flex($wrap:wrap);
+			background: $lt-gray-rvt;
+			@media (max-width: $rvt-dealer-bp-max) {
+				max-width:380px;
+				@include flex($direction: column);
+			}
+			padding: 15px;
 			width: 100%;
 		}
+		@media(min-width:350px){hr{display: none}}
+		hr{width:100%}
 	}
 
 	.dealer-list {
 		@include set-max-width;
-		@include flex(center, stretch, $wrap: wrap);
-		//@include flex-grid(3, 25px);
-		//@media (max-width: $desktop-breakpoint) {
-			//@include flex-grid(2, 25px);
-		//}
-		//@media (max-width: 650px) {
-			//@include flex-grid(1, 5px);
-		//}
+		@media (min-width: $rvt-dealer-bp){@include flex(center, stretch, $wrap: wrap);}
 	}
 </style>

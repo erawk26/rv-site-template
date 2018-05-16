@@ -49,25 +49,6 @@
 	margin: 0 auto;
 }
 
-%blk-block {
-	text-align: center;
-	font-size: 1.25em;
-	@include mobile {
-		font-size: 1em;
-	}
-	background: #454545;
-	color: white;
-	h1, h2, h3, h4 {
-		font-size: 2.5em;
-		@include mobile {
-			font-size: 2em;
-		}
-		font-weight: 600;
-		line-height: 1.15;
-		margin-bottom: 1.18em;
-	}
-}
-
 %arrow {
 	font-size: 17.5px;
 	letter-spacing: 0.24em;

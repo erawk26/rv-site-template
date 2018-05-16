@@ -1,18 +1,17 @@
 <template lang="pug">
 	li.dealer-card(:title="dealer.name")
 		h2.title {{ dealer.name }}
-		hr
-		a.tel(:href="`tel:${dealer.phone1}`")
-			h3
-				span.ss-phone
-				small Tap to call
+		.tel
+			a(:href="`tel:${dealer.phone1}`")
+				i.ss-phone
+				span.tap Tap to call
 				span.number {{ dealer.phone1 }}
 		small Can't talk now? Click below to send an email.
 		br
-		button(@click="showForm(dealer)")
+		button.contact(@click="showForm(dealer)")
 			i.ss-mail
 			span Contact this Pro
-		h4 Business Hours
+		h4.biz-hrs Business Hours
 		ul.hours
 			li
 				p Weekdays
@@ -93,47 +92,60 @@ export default {
 	}
 };
 </script>
-<style lang="scss" >
+<style lang="scss">
 	@import '../../styles/init';
-	hr{width:85%;margin:auto;border:none;background: transparent;border-top:1px solid $dk-gray-rvt}
+
+	hr {
+		width: 85%;
+		margin: auto;
+		border: none;
+		background: transparent;
+		border-top: 1px solid $dk-gray-rvt
+	}
+
 	.dealer-card {
-		@include flex($direction:column);
+		@include flex(flex-start, $direction: column);
 		text-align: center;
-		border-radius: 15px;
-		background: #fff;
-		box-shadow: 0 1px 10px 1px rgba(#000, .5);
+		box-shadow: 0 1px 10px 0 rgba(#000, .35);
 		flex: 1;
-		margin: 30px 30px 0;
-		min-width: 280px;
-		max-width: 100%;
-		@include not-mobile {
-			flex: 1 0 350px;
-			min-width: 320px;
-			max-width: 350px;
+		margin: 0 15px 0;
+		min-width: 230px;
+		max-width: 350px;
+		@media (min-width: $rvt-dealer-bp) {
+			background: #fff;
+			box-shadow: 0 2px 6px 1px rgba(#000, .5);
+			min-width: 300px;
+			border-radius: 15px;
 			margin: 15px;
 		}
-		> .flex-wrapper{flex:1;width:100%}
+		> .flex-wrapper {
+			width: 100%
+		}
 		> small {
+			font-style: italic;
 			text-align: center;
 		}
 	}
-	.title{padding:0 20px;}
-	a.tel h3 {
-		@include marding(10px auto, 0);
-		display: inline-block;
-		background: $md-blue-rvt;
-		color: #fff;
-		.ss-phone {
-			@include flex($display: inline-flex);
-			text-align: center;
-			width: 32px;
-			height: 32px;
-			margin: 7px;
-			padding: 4px 4px 0;
-			background: $dk-blue-rvt
-		}
-		small {
-			font-weight: bold;
+
+	.title {width:100%;
+		font-weight: normal;
+		margin:18px 0 0;
+		padding: 10px 20px 15px;
+		@include flex(center, flex-end);
+		@media(min-width: $rvt-dealer-bp) {
+			position: relative;
+			&:after {
+				position: absolute;
+				bottom: 0;
+				left: 50%;
+				right: 0;
+				content: "";
+				transform: translateX(-50%);
+				display: block;
+				width: 90%;
+				max-width: 350px;
+				border-top: 1px solid $md-gray-rvt;
+			}
 		}
 	}
 
@@ -143,23 +155,95 @@ export default {
 		margin: 0 10px;
 	}
 
+	.tel > a{
+		@include marding(10px auto, 0);
+		@include flex($display: inline-flex);
+		background: $md-blue-rvt;
+		border-radius: 2px;
+		color: #fff;
+		font-size: 1em;
+		font-weight: bold;
+		i {
+			@include flex($display: inline-flex);
+			width: 26px;
+			height: 26px;
+			text-align: center;
+			margin: 5px;
+			padding: 4px 4px 0;
+			background: $dk-blue-rvt
+		}
+		.tap {font-size: x-small;line-height: 1;
+		}
+		@media(min-width: $rvt-dealer-bp) {
+			background: none;
+			i {
+				width: 24px;
+				height: 24px;
+				margin: 0;
+				//padding: 4px 4px 0;
+				border-radius: 50%;
+				background: $md-blue-rvt
+			}
+			.number {
+				color: black;
+				font-weight: 900;
+				font-size: 1.5em;
+				margin: 0 0 0 10px;
+			}
+			.tap {
+				display: none
+			}
+		}
+	}
+
+	.contact {
+		@include flex($display: inline-flex);
+		padding: 8px 14px;
+		border-radius: 4px;
+		border: 1px solid $aqua-rvt;
+		background: transparent;
+		cursor: pointer;
+		color: $dk-blue-rvt;
+		font-weight: bold;
+		i:before {
+			font-size: 1.2em;
+			margin-right: .25em
+		}
+		transition: background-color .5s ease-in-out, color .25s ease-in-out;
+		&:hover,&:active {
+			background-color: $md-blue-rvt;
+			border-color:transparent;
+			color:white;
+		}
+	}
+
+	.biz-hrs {
+		margin: 10px auto 0;
+		font-weight: bold;
+	}
+
+	.hours {
+		flex: 1;
+		p {
+			margin: 4px;
+		}
+	}
+
 	.certs {
 		@include flex(space-between, stretch, $wrap: wrap);
+		@include marding(10px 0 0,20px 20px 16px 40px);
 		width: 100%;
 		height: 100%;
-		padding: 30px 20px 10px 40px;
 		text-align: left;
 		background: $lt-gray-rvt;
+		i:before {
+			padding-right: .4em;
+			opacity: .25;
+		}
 		li {
 			flex: 1 1 50%;
 			max-width: 50%;
-			margin-bottom: 20px;
-		}
-		i {
-			&:before {
-				padding-right: .4em;
-				opacity: .25
-			}
+			margin-bottom: 10px;
 		}
 	}
 </style>

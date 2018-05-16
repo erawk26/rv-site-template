@@ -7,10 +7,10 @@
 				i.ss-delete
 				span.screen-reader hide modal
 		.form-container
-			p Fill out the form below and {{ dealer.name }} will get in touch.
 			ul.is-danger(v-if="showErrors")
 				li.error-item(v-for="error in errors.items")
 					p.is-danger.help {{ error.msg }}
+			p Fill out the form below and {{ dealer.name }} will get in touch.
 			form(:id="`contact-${dealer.machine_name}`")
 				.input-group.name
 					label First and last name
@@ -142,7 +142,7 @@ export default {
 	}
 
 	.form-footer {
-		@include mobile{display: none;}
+		@media (max-width: $rvt-dealer-bp-max){display: none;}
 		@include flex(flex-end, flex-start, $direction: column);
 		@include marding(0, 20px);
 		background: $lt-gray-rvt;
@@ -150,7 +150,7 @@ export default {
 
 	form {
 		width: 100%;
-		@include not-mobile {
+		@media (min-width: $rvt-dealer-bp){
 			padding: 15px;
 			background: $lt-gray-rvt;
 		}
@@ -201,7 +201,7 @@ export default {
 	input[type="radio"] {
 		+ label{
 		}
-		@include mobile {
+		@media (max-width: $rvt-dealer-bp-max) {
 			display: none;
 			+ label {
 				font-size: .95em;
@@ -226,7 +226,7 @@ export default {
 				}
 			}
 		}
-		@include not-mobile {
+		@media (min-width: $rvt-dealer-bp) {
 			display: none;
 			+ label {
 				display:inline-block;
@@ -259,7 +259,7 @@ export default {
 			}
 		}
 		&.radios {
-			@include mobile{@include flex(flex-start,stretch,$wrap:wrap);}
+			@media (max-width: $rvt-dealer-bp-max){@include flex(flex-start,stretch,$wrap:wrap);}
 			> strong {
 				font-size: .85em;
 				display: block;
@@ -270,7 +270,7 @@ export default {
 		}
 		&.phone {
 			max-width: 250px;
-			@include mobile {
+			@media (max-width: $rvt-dealer-bp-max) {
 				max-width: 100%;
 			}
 		}
@@ -282,7 +282,7 @@ export default {
 		width: 100%;
 		text-align: center;
 		padding: 30px;
-		@include mobile {
+		@media (max-width: $rvt-dealer-bp-max) {
 			text-align: right;
 			padding: 5px 5px 0 0;
 			.ss-navigateright {

@@ -18,43 +18,58 @@ export default {
 		machine_readable: str => str
 			.toLowerCase()
 			.replace(/[^\w ]+/g, '')
-			.replace(/ +/g, '-'),
+			.replace(/ +/g, '-')
 	}
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 	@import '../../styles/init';
 
+	.filter-panel {
+		@include flex();
+		background: $lt-gray-rvt;
+		@media (max-width: $rvt-dealer-bp-max) {
+			background: #fff;
+			border: 1px solid $dk-gray-rvt;
+			width: 100%;
+			align-items: flex-start;
+			flex-direction: column;
+		}
+		.input-group {font-size:.8em;
+			padding: 10px;
+		}
+	}
+
+	$bdr-transition: .25s ease-in-out;
+	%bdr-transition {
+		transition: border-bottom-color $bdr-transition,
+		border-left-color $bdr-transition,
+		border-right-color $bdr-transition,
+		border-top-color $bdr-transition,
+		background-color $bdr-transition;
+	}
 	input[type="checkbox"] {
 		display: none;
 		& + label {
-			font-size: 1.25em;
+			font-size: 1.15em;
+			font-weight: bold;
 			@include flex;
 			&:before {
-				margin-right: .25em;
-				border-radius: 5px;
+				@extend %bdr-transition;
+				margin-right: .45em;
+				border-radius: 4px;
 				border: 1px solid #999;
-				width: 25px;
-				height: 25px;
+				width: 23px;
+				height: 23px;
 				position: relative;
 				content: ""
 			}
 		}
 		&:checked + label {
-			color: $dk-blue-rvt;
-			font-weight: bold;
+			//color: $dk-blue-rvt;
 			&:before {
-				border: 8px solid #083d8c;
+				border: 7.5px solid $md-blue-rvt;
 			}
-		}
-	}
-
-	.filter-panel {
-		@include flex($wrap: wrap);
-		background: $lt-gray-rvt;
-		.input-group {
-			display: inline-block;
-			padding: 10px;
 		}
 	}
 </style>

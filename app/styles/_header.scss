@@ -6,8 +6,17 @@ header {
 	top: 0;
 	left: 0;
 	right: 0;
-	.logo{padding:0 25px;}
+	.logo {width:230px;
+		margin:10px 0;
+		padding: 0 15px 0 25px;
+		@media (max-width: $rvt-menu-bp-max) {
+			padding-left:15px;
+			padding-right:5px;
+		}
+	}
 	nav {
+		background: white;box-shadow: 0 3px 10px 0 rgba(#000,.5);
+		@media (max-width:$rvt-menu-bp-max){}
 		&.sticky {
 			margin: 0;
 			position: fixed;
@@ -15,40 +24,75 @@ header {
 			left: 0;
 			right: 0;
 			z-index: 1000;
-			background: white
 		}
 	}
 	.flex-wrapper {
 		@include flex(space-between);
+		width:100%;
 		@include set-max-width;
 	}
 	.account {
 		background: $dk-blue-rvt;
-		display: none;
-		@include desktop {
-			@include flex;
+		.mw-wrapper {
+			@include set-max-width;
+			display: none;
+			@media (min-width: $rvt-menu-bp) {
+				@include flex(flex-end);
+			}
+			color: white;
 		}
-		color: white;
+		li {
+			padding: 8px 30px;
+		}
 		a {
 			color: currentColor
 		}
 	}
 }
 
+.loc-btn {
+	@include marding(5px 30px 5px auto, 4px 8px);
+	background: none;
+	min-width: 120px;
+	border-radius: 3px;
+	border: 1px solid $md-blue-rvt;
+	color: $md-blue-rvt;
+	cursor: pointer;
+	font-weight:bold;
+	@media(max-width: $rvt-menu-bp-max) {
+		min-width: 95px;
+		font-size: .75em;
+		text-transform: uppercase;
+		> span {
+			display: none
+		}
+		margin-left:15px;
+	}
+	@media(max-width: $bp-xs-max){margin: 5px;}
+	transition: background-color .5s ease-in-out, color .25s ease-in-out;
+	&:hover,&:active {
+		background-color: $md-blue-rvt;
+		border-color:transparent;
+		color:white;
+	}
+}
+
 .main-nav {
-	@include flex();
-	@include not-desktop {
+	flex:1;
+	@include flex(flex-end);
+	@media (max-width: $rvt-menu-bp-max) {
 		display: none;
 	}
 	li {
 		display: inline-block;
-		margin: 10px 5px;
-	}
-	&.right {
-		justify-content: flex-end
-	}
-	&.left {
-		justify-content: flex-start
+		margin: 35px 15px;
+		font-weight:800;
+		a {
+			color: $dk-blue-rvt;
+			&:hover, &:active {
+				color: $md-blue-rvt;
+			}
+		}
 	}
 }
 
@@ -57,13 +101,14 @@ header {
 	$menu-bg: $lt-gray-rvt;
 	$menu-link-hover: $stroke;
 	$menu-link: $dk-gray-rvt;
-	@include desktop {
+	@media (min-width: $rvt-menu-bp) {
 		display: none;
 	}
+	@media(max-width: $bp-xs-max){margin-top: 0;}
 	@include flex($direction: column);
 	position: relative;
-	z-index:10;
-	margin-right: 35px;
+	z-index: 10;
+	margin: 5px 5px 0 0;
 	ul {
 		@include flex($direction: column);
 	}
@@ -74,7 +119,7 @@ header {
 		width: 55px;
 		height: 45px;
 		position: relative;
-		margin: 50px auto;
+		margin: 0 auto;
 		transform: rotate(0deg);
 		transition: 0.5s ease-in-out;
 		cursor: pointer;
@@ -92,19 +137,36 @@ header {
 		transform: translate(150%, 0);
 		padding: 0 0 0; // 135px 20px 20px;
 		z-index: -3;
-		.mobile-menu-header{padding:25px 0;border-top:5px solid $aqua-rvt;p{font: bold 1.4em $fontHead}}
-		ul{border-bottom:5px solid $aqua-rvt}
+		.mobile-menu-header {
+			padding: 25px 0;
+			border-top: 5px solid $aqua-rvt;
+			p {
+				font: bold 1.4em $fontHead
+			}
+			i:before {
+				cursor: pointer;
+				color: $dk-blue-rvt;
+				position: absolute;
+				top: 21px;
+				right: 17px;
+				font-size: 1.5em;
+			}
+		}
+		ul {
+			border-bottom: 5px solid $aqua-rvt
+		}
 		li {
 			width: 100%;
 			display: block;
 			margin: 1px 0;
 			background: $menu-bg;
-			a {position: relative;
+			a {
+				position: relative;
 				display: block;
 				width: 100%;
-				padding:30px 20px;
+				padding: 30px 20px;
 				font-size: 1.5em;
-				font-weight:bold;
+				font-weight: bold;
 				font-family: $fontHead;
 				text-align: left;
 				justify-content: flex-end;
@@ -115,7 +177,11 @@ header {
 				&:hover, &:active {
 					color: $menu-link-hover;
 				}
-				&:after {position:absolute; right:20px;top:50%;transform: translateY(-50%);
+				&:after {
+					position: absolute;
+					right: 20px;
+					top: 50%;
+					transform: translateY(-50%);
 					color: $aqua-rvt;
 					font-family: $fontIcon;
 					content: '\25BB';
@@ -128,7 +194,10 @@ header {
 		}
 	}
 	&.opened {
-		.hamburger{opacity:0;width:0;}
+		.hamburger {
+			opacity: 0;
+			width: 0;
+		}
 		.collapse {
 			transition: all .65s ease-in;
 			transform: translate(0) scale(1);
