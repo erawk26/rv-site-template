@@ -133,10 +133,11 @@ export default {
 	}
 
 	.title {width:100%;
+		min-height:110px;
 		font-weight: normal;
-		margin:18px 0 0;
+		margin:5px 0 0;
 		padding: 10px 20px 15px;
-		@include flex(center, flex-end);
+		@include flex(center, center);
 		@media(min-width: $rvt-dealer-bp) {
 			position: relative;
 			&:after {
