@@ -65,6 +65,9 @@ const commonConfig = merge([
 	parts.loadVue({
 		include: PATHS.app,
 		options: {
+			autoprefixer: {
+				browsers: ['last 2 versions']
+			},
 			postLoaders: {
 				html: 'babel-loader'
 			},
