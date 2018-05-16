@@ -15,16 +15,13 @@
 		ul.hours
 			li
 				p Weekdays
-					span(v-if="hours[0].length") {{ hours[0] }}
-					span(v-else) Closed
+					span  {{ hours[0] }}
 			li
-				p Saturday
-					span(v-if="hours[1].length") {{ hours[1] }}
-					span(v-else) Closed
+				p Saturdays
+					span  {{ hours[1] }}
 			li
-				p Sunday
-					span(v-if="hours[2].length") {{ hours[2] }}
-					span(v-else) Closed
+				p Sundays
+					span  {{ hours[2] }}
 		.flex-wrapper
 			ul.certs
 				li(v-for="cert in dealer.certifications")
@@ -40,7 +37,15 @@ export default {
 	computed: {
 		hours() {
 			const days = Object.keys(this.dealer.weekHours);
-			const arr = days.map(day => this.dealer.weekHours[day]).slice(-3);
+			const arr = days.map(day => {
+				let str = this.dealer.weekHours[day];
+				if (str.length === 0) {
+					str = '- Closed';
+				} else if (str.toLowerCase() === 'on call') {
+					str = '- On Call';
+				}
+				return str;
+			}).slice(-3);
 			return arr;
 		}
 	},

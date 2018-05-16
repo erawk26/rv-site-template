@@ -27,12 +27,8 @@
 						v-else)
 				.input-group.phone
 					label Phone number
-					input(type="phone",
-					name="phone",
-					id="customer-phone",
-					:class="{'invalid': fields.phone && showErrors && fields.phone.invalid}"
-					v-validate="{ required: true, regex: /^(?:1|1 )*(\\([2-9]{1}\\d{2}\\)|[2-9]{1}\\d{2})[- ]*(\\d{3})[- ]*(\\d{4})$/ }",
-					v-model="customer.phone1")
+					// eslint-disable-next-line
+					input(type="phone", name="phone", id="customer-phone", :class="{'invalid': fields.phone && showErrors && fields.phone.invalid}", v-model="customer.phone1", v-validate="{ required: true, regex: /^(?:1|1 )*(\\([2-9]{1}\\d{2}\\)|[2-9]{1}\\d{2})[- ]*(\\d{3})[- ]*(\\d{4})$/ }")
 					.helper
 						img.invalid(src="../../images/circle-form.png",
 						v-if="fields.phone && fields.phone.invalid")
@@ -80,7 +76,10 @@
 					i.ss-navigateright
 		.form-footer
 			small.disclaimer
-				| *Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium atque doloremque ex facere id maxime modi nisi. Aliquam consequuntur cupiditate est, ex fugiat laudantium nemo odit recusandae, repellendus rerum vero.
+				| *Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+				|  Accusantium atque doloremque ex facere id maxime modi nisi.
+				|  Aliquam consequuntur cupiditate est, ex fugiat laudantium
+				|  nemo odit recusandae, repellendus rerum vero.
 </template>
 
 <script>
@@ -93,7 +92,7 @@ export default {
 		showErrors: false
 	}),
 	methods: {
-		validateForm(e) {
+		validateForm() {
 			this.$validator.validateAll().then((result) => {
 				if (result) {
 					// eslint-disable-next-line

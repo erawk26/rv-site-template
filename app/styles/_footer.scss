@@ -7,18 +7,16 @@ footer {
 	background: $dk-blue-rvt;
 	text-align: center;
 	.logo {
-		width: 250px;
+		width: 190px;
 	}
 	.menu {
-		@include flex();
 		li {
 			display: inline-block;
 			margin: 0;
 		}
 	}
-	.img-wrapper {
-		@include flex;
-	}
+
+
 	ul.footer-1 {
 		width: 100%;
 		padding: 15px;
@@ -51,11 +49,14 @@ footer {
 		}
 	}
 	ul.follow {
-		@include flex;
-		@media(max-width: $rvt-menu-bp-max) {
-			.uc {
-				margin-right: 30px
-			}
+		@include marding(0,20px 0);
+		display:flex;
+		align-items: center;
+		justify-content: center;
+		//@include flex;
+		.uc {
+			display: inline-block;
+			@include marding(0 40px 0 0,0);
 		}
 		a img {
 			height: 20px;
@@ -63,10 +64,6 @@ footer {
 			display: block;
 			margin: 0 10px;
 		}
-		//li {
-		//	a {
-		//	}
-		//}
 	}
 }
 

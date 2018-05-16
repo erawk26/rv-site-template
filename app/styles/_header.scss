@@ -15,8 +15,8 @@ header {
 		}
 	}
 	nav {
-		background: white;box-shadow: 0 3px 10px 0 rgba(#000,.5);
-		@media (max-width:$rvt-menu-bp-max){}
+		background: white;
+		box-shadow: 0 3px 10px 0 rgba(#000,.5);
 		&.sticky {
 			margin: 0;
 			position: fixed;
@@ -83,11 +83,12 @@ header {
 	@media (max-width: $rvt-menu-bp-max) {
 		display: none;
 	}
-	li {
+	li {flex:1;
+		max-width:150px;
 		display: inline-block;
-		margin: 35px 15px;
-		font-weight:800;
+		margin: 35px 0;
 		a {
+			font-weight:bold;
 			color: $dk-blue-rvt;
 			&:hover, &:active {
 				color: $md-blue-rvt;

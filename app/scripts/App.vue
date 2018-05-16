@@ -111,6 +111,7 @@ export default {
 				max-width:380px;
 				@include flex($direction: column);
 			}
+
 			padding: 15px;
 			width: 100%;
 		}
