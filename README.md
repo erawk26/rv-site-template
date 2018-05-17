@@ -1,2 +1,2 @@
-# pug-scss-es6-boilerplate
-A simple site boilerplate using pug, scss, and es6
+# RV-Site Template
+A simple site template using vue, pug, scss, and es6
