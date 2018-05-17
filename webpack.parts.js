@@ -217,9 +217,9 @@ exports.optimizeImages = ({ include, exclude } = {}) => ({
 							interlaced: false
 						},
 						// the webp option will enable WEBP
-						webp: {
-							quality: 75
-						}
+						// webp: {
+						// 	quality: 75
+						// }
 					}
 				}
 			}
