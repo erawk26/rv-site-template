@@ -5,7 +5,6 @@
 			h2.name {{ dealer.name }}
 			.close(@click="$emit('close')")
 				i.ss-delete
-				span.screen-reader hide modal
 		.form-container
 			ul.is-danger(v-if="showErrors")
 				li.error-item(v-for="error in errors.items")
