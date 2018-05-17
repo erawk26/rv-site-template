@@ -134,8 +134,9 @@ export default {
 	}
 
 	.flex-wrapper.list {
+		padding-bottom: 60px;
 		@media (min-width: $rvt-dealer-bp) and (max-width: $bp-mw) {
-			padding: 30px;
+			padding: 30px 30px 60px;
 		}
 	}
 </style>
