@@ -1,93 +1,93 @@
 footer {
-	@include marding(50px 0 0, 35px 0 0);
-	position: absolute;
-	bottom:0;
-	left:0;
-	right:0;
-	color: white;
-	a {
-		color: currentColor
-	}
-	background: $dk-blue-rvt;
-	text-align: center;
-	.logo {
-		width: 190px;
-	}
-	.menu {
-		li {
-			display: inline-block;
-			margin: 0;
-		}
-	}
+  @include marding(50px 0 0, 35px 0 0);
+  position: absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  color: white;
+  a {
+    color: currentColor
+  }
+  background: $dk-blue-rvt;
+  text-align: center;
+  .logo {
+    width: 190px;
+  }
+  .menu {
+    li {
+      display: inline-block;
+      margin: 0;
+    }
+  }
 
 
-	ul.footer-1 {
-		width: 100%;
-		padding: 10px;
-		background: $md-blue-rvt;
-		li {
-			@extend %divider
-		}
-	}
-	ul.account {
-		background: $md-blue-rvt;
-		padding: 10px;
-		@media(max-width:$bp-xs-max){padding: 15px 10px;}
-		position: relative;
-		&:after {
-			position: absolute;
-			bottom: 0;
-			left: 50%;
-			right: 0;
-			content: "";
-			transform: translateX(-50%);
-			display: block;
-			width: 90%;
-			max-width: 350px;
-			border-top: 0.5px solid #fff
-		}
-		@media(min-width: $rvt-menu-bp) {
-			display: none;
-		}
-		li {
-			@extend %divider
-		}
-	}
-	ul.follow {
-		@include marding(0,20px 0);
-		@include flex;
-		.uc {
-			display: inline-block;
-			@include marding(0 40px 0 0,0);
-		}
-		a img {
-			height: 20px;
-			width: auto;
-			display: block;
-			margin: 0 10px;
-		}
-	}
+  ul.footer-1 {
+    width: 100%;
+    padding: 10px;
+    background: $md-blue-rvt;
+    li {
+      @extend %divider
+    }
+  }
+  ul.account {
+    background: $md-blue-rvt;
+    padding: 10px;
+    @media(max-width:$bp-xs-max){padding: 15px 10px;}
+    position: relative;
+    &:after {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      right: 0;
+      content: "";
+      transform: translateX(-50%);
+      display: block;
+      width: 90%;
+      max-width: 350px;
+      border-top: 0.5px solid #fff
+    }
+    @media(min-width: $rvt-menu-bp) {
+      display: none;
+    }
+    li {
+      @extend %divider
+    }
+  }
+  ul.follow {
+    @include marding(0,20px 0);
+    @include flex;
+    .uc {
+      display: inline-block;
+      @include marding(0 40px 0 0,0);
+    }
+    a img {
+      height: 20px;
+      width: auto;
+      display: block;
+      margin: 0 10px;
+    }
+  }
 }
 
 .back-to-top {
-	opacity: 0;
-	font-size: 0.75em;
-	position: fixed;
-	cursor: pointer;
-	bottom: 0;
-	right: 0;
-	display: inline-block;
-	padding: 1em;
-	margin: 1em;
-	background: rgba(white, 0.75);
-	border: 1px solid rgba(black, 0.4);
-	transition: all 0.25s linear;
-	border-radius: 4px;
-	z-index: 3;
-	:hover {
-		border-radius: 4px;
-		background: white;
-		border: 1px solid black;
-		cursor: pointer;
-	}
+  opacity: 0;
+  font-size: 0.75em;
+  position: fixed;
+  cursor: pointer;
+  bottom: 0;
+  right: 0;
+  display: inline-block;
+  padding: 1em;
+  margin: 1em;
+  background: rgba(white, 0.75);
+  border: 1px solid rgba(black, 0.4);
+  transition: all 0.25s linear;
+  border-radius: 4px;
+  z-index: 3;
+  :hover {
+    border-radius: 4px;
+    background: white;
+    border: 1px solid black;
+    cursor: pointer;
+  }
 }
