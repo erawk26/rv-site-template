@@ -1,5 +1,9 @@
 footer {
 	@include marding(50px 0 0, 35px 0 0);
+	position: absolute;
+	bottom:0;
+	left:0;
+	right:0;
 	color: white;
 	a {
 		color: currentColor

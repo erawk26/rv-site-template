@@ -111,17 +111,19 @@ export default {
 	.dealer-card {
 		@include flex(flex-start, $direction: column);
 		text-align: center;
-		box-shadow: 0 1px 10px 0 rgba(#000, .35);
-		flex: 1;
-		margin: 0 15px 0;
-		min-width: 230px;
-		max-width: 350px;
+		@media (max-width: $rvt-dealer-bp-max){
+			box-shadow: 0 1px 10px 0 rgba(#000, .35);
+			flex: 1;
+			margin: 0 15px 0;
+			min-width: 230px;
+			max-width: 350px;
+		}
 		@media (min-width: $rvt-dealer-bp) {
 			background: #fff;
 			box-shadow: 0 2px 6px 1px rgba(#000, .5);
-			min-width: 300px;
+			//min-width: 300px;
 			border-radius: 15px;
-			margin: 15px;
+			//margin: 15px;
 		}
 		> .flex-wrapper {
 			width: 100%
@@ -132,8 +134,9 @@ export default {
 		}
 	}
 
-	.title {width:100%;
-		min-height:110px;
+	.title {
+		width:100%;
+		min-height:100px;
 		font-weight: normal;
 		margin:5px 0 0;
 		padding: 10px 20px 15px;

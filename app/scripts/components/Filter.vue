@@ -7,6 +7,8 @@
 			v-model="checkedOptions",
 			@change="$emit('input', checkedOptions)",)
 			label(:for="`${machine_readable(opt)}-checkbox`") {{ opt.replace(/ Pro/i,"") }}
+		a.help.center(href="#")
+			img(width='23' height="23" src='../../images/tool-tip-icon-filtering.png')
 </template>
 <script>
 export default {
@@ -28,14 +30,24 @@ export default {
 	.filter-panel {
 		@include flex();
 		background: $lt-gray-rvt;
+		position: relative;
 		@media (max-width: $rvt-dealer-bp-max) {
 			background: #fff;
 			border: 1px solid $dk-gray-rvt;
 			width: 100%;
 			align-items: flex-start;
 			flex-direction: column;
+			.help {
+				position: absolute;
+				right: 0;
+				bottom: 0;
+			}
 		}
-		.input-group {font-size:.8em;
+		.input-group {
+			font-size: .8em;
+			padding: 10px;
+		}
+		.help{
 			padding: 10px;
 		}
 	}
@@ -50,7 +62,7 @@ export default {
 	}
 	input[type="checkbox"] {
 		display: none;
-		& + label {
+		& + label {cursor: pointer;
 			font-size: 1.15em;
 			font-weight: bold;
 			@include flex;

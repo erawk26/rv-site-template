@@ -12,7 +12,7 @@
 			:loc="location",
 			:options="certs")
 		hr
-		.flex-wrapper
+		.flex-wrapper.list
 			ul.dealer-list
 				dealer-card(v-for='dealer in filteredArr',
 				:id='`item-${dealer.companyID}`',
@@ -103,7 +103,8 @@ export default {
 	}
 
 	.content {
-		@include flex($direction: column);
+		@include flex(flex-start,$direction: column);
+		flex:1;
 		.filter {@include set-max-width;
 			@include flex($wrap:wrap);
 			background: $lt-gray-rvt;
@@ -121,6 +122,20 @@ export default {
 
 	.dealer-list {
 		@include set-max-width;
-		@media (min-width: $rvt-dealer-bp){@include flex(center, stretch, $wrap: wrap);}
+		// @media (min-width: $rvt-dealer-bp){@include flex(center, stretch, $wrap: wrap);}
+		@media (min-width: $rvt-dealer-bp) and (max-width:$bp-md-max){
+			@include flex(center, stretch, $wrap: wrap);
+			@include flex-grid(2,30px);
+		}
+		@media (min-width: $bp-md){
+			@include flex(center, stretch, $wrap: wrap);
+			@include flex-grid(3,20px);
+		}
+	}
+
+	.flex-wrapper.list {
+		@media (min-width: $rvt-dealer-bp) and (max-width: $bp-mw) {
+			padding: 30px;
+		}
 	}
 </style>

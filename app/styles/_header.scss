@@ -6,7 +6,8 @@ header {
 	top: 0;
 	left: 0;
 	right: 0;
-	.logo {width:230px;
+	.logo {
+		width:230px;
 		margin:10px 0;
 		padding: 0 15px 0 25px;
 		@media (max-width: $rvt-menu-bp-max) {
@@ -84,11 +85,10 @@ header {
 		display: none;
 	}
 	li {
-		flex:1;
-		max-width:150px;
 		display: inline-block;
-		margin: 35px 0;
+		margin: 35px 7% 35px 1%;
 		a {
+			font-size: 1.19em;
 			font-weight:bold;
 			color: $dk-blue-rvt;
 			&:hover, &:active {
